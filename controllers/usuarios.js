@@ -1,4 +1,4 @@
-const Usuario = require('../models/UsuarioEjemplo');
+const Usuario = require('../models/Usuario');
 
 const crearUsuario = (req, res) => {
     const usuario = new Usuario(...req.body);
@@ -6,14 +6,13 @@ const crearUsuario = (req, res) => {
 }
 
 const obtenerUsuarios = (req, res) => {
-    const usuario = new Usuario(1, "juancho",'Juan', 'Vega', 'juan@vega.com', 12345, "aqui", "1234566", "hola", undefined, "normal" );
-    const usuario2 = new Usuario(2, "juanast", "Juana", "Asturias", "ast@vega.ast", 123456, "allá", "12568934", "soy yo", undefined, "anunciante");
-
+    const usuario = new Usuario(1, "juancho", "Juan Vega", "juanito123", "admin");
+    const usuario2 = new Usuario(2, "juanast", "Juana Asturias", "asturitas", "cajero");
     res.send([usuario, usuario2]);
 }
 
 const modificarUsuario = (req, res) => {
-    let usuario = new Usuario(req.params.id, "juancho",'Juan', 'Vega', 'juan@vega.com', 12345, "aqui", "1234566", "hola", undefined, "normal" );
+    let usuario = new Usuario(req.params.id, "juancho",'Juan Vega', "1234566", "cajero");
     const modificaciones = req.body;
     usuario = {...usuario, ...modificaciones};
     res.status(200).send(usuario);
