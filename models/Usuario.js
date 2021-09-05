@@ -1,16 +1,9 @@
 class Usuario {
-    constructor(id, username, nombre, apellido, email, password, ubicacion, telefono, bio, fotos, tipo){
-        this.id = id;
-        this.username = username;
+    constructor(usuario, nombre, contraseña, rol){
+        this.usuario = usuario;
         this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.password = password;
-        this.ubicacion = ubicacion;
-        this.telefono = telefono;
-        this.bio = bio;
-        this.fotos = fotos;
-        this.tipo = tipo;
+        this.contraseña = contraseña;
+        this.rol = rol;
     }
 }
 

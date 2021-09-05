@@ -1,4 +1,4 @@
-const Usuario = require('../models/Usuario');
+const Usuario = require('../models/UsuarioEjemplo');
 
 const crearUsuario = (req, res) => {
     const usuario = new Usuario(...req.body);
