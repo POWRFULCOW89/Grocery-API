@@ -71,7 +71,8 @@ API para un punto de venta de una miscelánea
   - Admin, gerente, cajero, venta, producto
 
 - ¿Qué características tiene cada entidad?
-  - Inventario: Nombre de producto, categoría, stock, código.
+  - Inventario
+    - Producto: Nombre de producto, categoría, stock, precio, código.
   - Usuario: Nombre de usuario, Nombre, contraseña, Rol
   - Venta: Productos, cantidad, subtotal, total
 - ¿Qué funcionalidades tiene cada entidad?
