@@ -9,6 +9,7 @@ mongoose.connect(uri);
 mongoose.set("debug", true);
 
 require("./models/Usuario");
+require("./models/Solicitud");
 
 app.use(bodyParser.json());
 
