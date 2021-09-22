@@ -1,5 +1,6 @@
 const jwt = require("express-jwt");
-const secret = require("../config").secret;
+// const secret = require("../config").secret;
+const secret = process.env.SECRET;
 
 const getTokenFromHeader = req => {
     const authorization = req.headers.authorization;

@@ -1,10 +1,14 @@
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+  }
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const uri = require('./config').secret;
-mongoose.connect(uri);
+// const uri = require('./config').secret;
+mongoose.connect(process.env.SECRET);
 
 mongoose.set("debug", true);
 

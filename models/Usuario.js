@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const crypto = require('crypto');
 const jwt = require("jsonwebtoken");
-const secret = require('../config').secret;
+const secret = process.env.SECRET;
 
 const SchemaUsuario = new mongoose.Schema({
     usuario: {type: String, required: [true, "El nombre de usuario debe ser único"], unique: true},
