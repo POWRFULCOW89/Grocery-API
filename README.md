@@ -49,7 +49,7 @@ API para un punto de venta de una tienda miscelánea
 ### 2. Definan los requerimientos del proyecto, así como su estructura, es decir, respondan las preguntas
 
 - ¿Qué espero que haga el proyecto?
-  - Se espera que la api pueda proporcionar endpoints para el registro, ventas y administración del inventario.
+  - Se espera que la API pueda proporcionar endpoints para el registro, ventas y administración del inventario.
 - ¿Qué tipos de usuario tendrá nuestro sistema?
   - Administrador: Dueño del local
     - Generar reportes
