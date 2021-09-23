@@ -1,6 +1,6 @@
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
-  }
+}
 
 const express = require('express');
 const app = express();
@@ -21,6 +21,6 @@ require("./config/passport.js");
 
 app.use('/v1', require('./routes/index.js')); // ruteo
 
-app.listen(80, () => console.log('App listening on 80'));
+app.listen(3000, () => console.log('App listening on 3000'));
 
 module.exports = app;

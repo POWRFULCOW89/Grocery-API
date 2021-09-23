@@ -24,21 +24,27 @@
     npm i 
     ```
 
-3. Ejecutar la aplicación:
+3. Ejecutar las pruebas:
 
     ```sh
-    npm dev
+    npm test
+    ```
+
+4. Ejecutar la aplicación:
+
+    ```sh
+    npm run dev
     ```
 
 ## Pila técnica
 
-Se trata de una API construida con Express, un framework backend para el entorno de ejecución Node.js.
+Se trata de una API construida con [Express](https://expressjs.com/es/), un framework backend para el entorno de ejecución Node.js. [Mongoose](https://mongoosejs.com) se utiliza como Object Document Mapper en conjunción con MongoDB. Las pruebas unitarias son modeladas con [Chai](https://www.chaijs.com) y ejecutadas en [Mocha](https://mochajs.org). Como sistema de autenticación, se cuenta con [Passport](http://www.passportjs.org).
 
 ## Especificación del proyecto
 
 ### 1. Definan en equipo cuál será la temática de su proyecto
 
-API para un punto de venta de una miscelánea
+API para un punto de venta de una tienda miscelánea
 
 ### 2. Definan los requerimientos del proyecto, así como su estructura, es decir, respondan las preguntas
 
@@ -50,10 +56,10 @@ API para un punto de venta de una miscelánea
     - Administración de inventario
     - Contaduría
     - Administracion de usuarios
-  - Cajero:
-    - Encargado de ventas
   - Gerente:
     - Administración de inventario
+  - Cajero:
+    - Encargado de ventas
 - ¿Qué acciones puede realizar cada usuario?
   - Administrador:
     - Generar reportes por periodos de ventas
