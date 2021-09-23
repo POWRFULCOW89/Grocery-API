@@ -7,7 +7,11 @@ const mongoose = require("mongoose");
 
 const app = require('../app.js');
 
-const Usuario = require("../models/Usuario");
+// const api = app
+const api = 'https://proyectofinalback19.herokuapp.com';
+
+// const Usuario = require("../models/Usuario");
+const Usuario = mongoose.model("Usuario");
 
 chai.use(chaiHttp); // para realizar peticiones a nuestra API
 
@@ -27,10 +31,11 @@ describe('Flujo de usuario', () => {
     }
 
     let token = undefined;
+    let id = undefined;
 
     it('should create a new user', async () => {
 
-        chai.request(app)
+        chai.request(api)
             // .post('v1/usuarios')
             .post('/v1/usuarios')
             .set('content-type', 'application/json')
@@ -43,12 +48,15 @@ describe('Flujo de usuario', () => {
                 expect(res.body).to.have.property('email');
                 expect(res.body).to.have.property('token');
                 // token = res.body.token;
+                Usuario.findOne({email: nuevoUsuario.email}).then(user => id = user._id).catch(console.log);
             });
+        
     });
 
     it('should login',  async () => {
 
-        chai.request(app)
+
+        chai.request(api)
             // .post('v1/usuarios')
             .post('/v1/usuarios/entrar')
             .set('content-type', 'application/json')
@@ -71,7 +79,7 @@ describe('Flujo de usuario', () => {
 
     it('should retrieve all users', async () => {
 
-        chai.request(app)
+        chai.request(api)
             // .post('v1/usuarios')
             .get('/v1/usuarios')
             .set('content-type', 'application/json')
@@ -89,8 +97,8 @@ describe('Flujo de usuario', () => {
 
         const user = "614a93e8a2f74c4ad3c838fe";
         
-        chai.request(app)
-            .get('/v1/usuarios/' + user)
+        chai.request(api)
+            .get('/v1/usuarios/' + id)
             .set('content-type', 'application/json')
             .auth(token, { type: 'bearer' })
             .end((err, res) => {
@@ -108,8 +116,8 @@ describe('Flujo de usuario', () => {
 
     it('should edit the user profile',  async () => {
 
-        chai.request(app)
-            .put('/v1/usuarios')
+        chai.request(api)
+            .put('/v1/usuarios/' + id)
             .set('content-type', 'application/json')
             .auth(token, { type: 'bearer' })
             .send(JSON.stringify({
@@ -133,8 +141,8 @@ describe('Flujo de usuario', () => {
     
     it('should delete the current user',  async () => {
 
-        chai.request(app)
-            .delete('/v1/usuarios')
+        chai.request(api)
+            .delete('/v1/usuarios/' + id)
             .set('content-type', 'application/json')
             .auth(token, { type: 'bearer' })
             .end((err, res) => {

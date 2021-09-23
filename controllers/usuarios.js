@@ -31,38 +31,44 @@ const obtenerUsuarios = (req, res, next) => {
             .then(docs => res.send(docs))
             .catch(next);
     } 
-    
 }
   
 function modificarUsuario(req, res, next) {
-    Usuario.findById(req?.usuario?.id)
-        .then(user => {
-            if (!user) return res.sendStatus(404); 
-            let nuevaInfo = req.body;
-
-            if (typeof nuevaInfo.usuario !== 'undefined') user.usuario = nuevaInfo.usuario;
-            if (typeof nuevaInfo.nombre !== 'undefined') user.nombre = nuevaInfo.nombre;
-            if (typeof nuevaInfo.email !== 'undefined') user.email = nuevaInfo.email;
-            if (typeof nuevaInfo.rol !== 'undefined') user.rol = nuevaInfo.rol;
-            if (typeof nuevaInfo.password !== 'undefined') {
-                user.createPassword(nuevaInfo.password);
+    if(req.params.id){
+        Usuario.findById(req.params.id)
+            .then(user => {
+                if (!user) return res.sendStatus(404); 
+                let nuevaInfo = req.body;
+    
+                if (typeof nuevaInfo.usuario !== 'undefined') user.usuario = nuevaInfo.usuario;
+                if (typeof nuevaInfo.nombre !== 'undefined') user.nombre = nuevaInfo.nombre;
+                if (typeof nuevaInfo.email !== 'undefined') user.email = nuevaInfo.email;
+                if (typeof nuevaInfo.rol !== 'undefined') user.rol = nuevaInfo.rol;
+                if (typeof nuevaInfo.password !== 'undefined') {
+                    user.createPassword(nuevaInfo.password);
+                    user.save()
+                        .then(updatedUser => res.status(201).json(updatedUser.publicData()))
+                        .catch(next);
+                }
+                
                 user.save()
-                    .then(updatedUser => res.status(201).json(updatedUser.publicData()))
-                    .catch(next);
-            }
-            // res.json(user);
-            user.save()
-            .then(updated => res.json(updated.publicData()))
-            .catch(next);
-    }).catch(next)
+                .then(updated => res.json(updated.publicData()))
+                .catch(next);
+        }).catch(next);
+    } 
+    
+    else res.sendStatus(400);
 }
 
 function eliminarUsuario(req, res, next) {
-    // únicamente borra a su propio usuario obteniendo el id del token
-    let { id } = req.usuario;
-    Usuario.findOneAndDelete({ _id: id }).then(r => {         //Buscando y eliminando usuario en MongoDB.
-        res.send(r);
-    }).catch(next);
+    let { id } = req.params;
+    // Usuario.findOneAndDelete({ _id: id }).then(r => {         //Buscando y eliminando usuario en MongoDB.
+    //     res.send(r);
+    // }).catch(next);
+
+    Usuario.findByIdAndDelete(id)
+    .then(r => res.send(r))
+    .catch(next);
 }
 
 

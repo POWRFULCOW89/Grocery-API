@@ -14,7 +14,7 @@ router.get('/', auth.requerido, obtenerUsuarios);
 router.get('/:id', auth.requerido, obtenerUsuarios);
 router.post('/', crearUsuario);
 router.post('/entrar', iniciarSesion)
-router.put('/', auth.requerido, modificarUsuario);
-router.delete('/', auth.requerido, eliminarUsuario);
+router.put('/:id', auth.requerido, modificarUsuario);
+router.delete('/:id', auth.requerido, eliminarUsuario);
 
 module.exports = router;
