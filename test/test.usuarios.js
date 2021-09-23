@@ -7,15 +7,15 @@ const mongoose = require("mongoose");
 
 const app = require('../app.js');
 
-// const api = app
-const api = 'https://proyectofinalback19.herokuapp.com';
+const api = app
+// const api = 'https://proyectofinalback19.herokuapp.com';
 
 // const Usuario = require("../models/Usuario");
 const Usuario = mongoose.model("Usuario");
 
 chai.use(chaiHttp); // para realizar peticiones a nuestra API
 
-describe('Flujo de usuario', () => {
+describe.skip('Flujo de usuario', () => {
     beforeEach( async () => {
         await new Promise(resolve => setTimeout(resolve, 1000));
         console.log("----------------------");

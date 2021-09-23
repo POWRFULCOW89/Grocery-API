@@ -19,7 +19,7 @@ const SchemaUsuario = new mongoose.Schema({
     nombre: {type: String, required: true},
     // contraseña: {type: String, required: true},
     email: {type: String, required: true, unique:true},
-    rol: {type: String, required: true, enum: ["admin", "cajero"]},
+    rol: {type: String, required: [true, 'Debe contener uno de los siguientes roles: admin, cajero.'], enum: ["admin", "cajero"]},
     hash: String,
     salt: String
 }, {collection: "usuarios", timestamps: true});

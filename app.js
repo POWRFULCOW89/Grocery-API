@@ -13,7 +13,8 @@ mongoose.connect(process.env.SECRET);
 mongoose.set("debug", true);
 
 require("./models/Usuario");
-require("./models/Solicitud");
+require("./models/Producto")
+// require("./models/Solicitud");
 
 app.use(bodyParser.json());
 

@@ -1,26 +1,58 @@
-const Producto = require('../models/Producto');
+const mongoose = require('mongoose');
+const Producto = mongoose.model('Producto');
+const {sanitizeJSON} = require('../util');
 
-const crearProducto = (req, res) => {
-    const producto = new Producto(...req.body);
-    res.status(200).send(producto);
+const crearProducto = (req, res, next) => {
+    const producto = new Producto(req.body);
+    producto.save()
+    .then(prod => res.json(prod))
+    .catch(next);
 }
 
-const obtenerProductos = (req, res) => {
-    const prod1 = new Producto("Sol", "Clara", 10, 19, "SOL001")
-    const prod2 = new Producto("Bud Light", "Clara", 10, 29, "BUD001")
-
-    res.send([prod1, prod2]);
+const obtenerProductos = (req, res, next) => {
+    if (req.params.codigo){ // Si se buscó por id, devolver el registro
+        Producto.findOne({codigo: req.params.codigo})
+        .then(prod => {
+            if (!prod) return res.sendStatus(404);
+            else res.json(prod);
+        })
+        .catch(next);
+    } else { // Si no se especificó un id, devolver todos los registros
+        Producto.find()
+        .then(prods => {
+            if (!prods) return res.sendStatus(404);
+            else res.send(prods);
+        })
+        .catch(next);
+    }
 }
 
-const modificarProducto = (req, res) => {
-    let prod = new Producto("Sol", "Clara", 10, 29, "SOL001")
-    const modificaciones = req.body;
-    prod = {...prod, ...modificaciones};
-    res.status(200).send(prod);
+const modificarProducto = (req, res, next) => {
+    if (!req.body) res.status(400).send('No body provided');
+
+    if (req.params.codigo){
+        Producto.findOne({codigo: req.params.codigo})
+        .then(prod => {
+            if (!prod) return res.sendStatus(404);
+
+            let nuevaInfo = sanitizeJSON(req.body);
+            
+            Object.assign(prod, nuevaInfo);
+
+            prod.save()
+            .then(updated => res.json(updated))
+            .catch(next);
+        })
+        .catch(next);
+    }
+
+    else res.sendStatus(400);
 }
 
-const eliminarProducto = (req, res) => {
-    res.status(200).send(`Producto ${req.params.id} eliminado`); // Eliminación simulada
+const eliminarProducto = (req, res, next) => {
+    Producto.findOneAndDelete({codigo: req.params.codigo})
+    .then(r => res.json(r))
+    .catch(next);
 }
 
 module.exports = {

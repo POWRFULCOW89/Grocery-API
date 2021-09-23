@@ -62,9 +62,6 @@ function modificarUsuario(req, res, next) {
 
 function eliminarUsuario(req, res, next) {
     let { id } = req.params;
-    // Usuario.findOneAndDelete({ _id: id }).then(r => {         //Buscando y eliminando usuario en MongoDB.
-    //     res.send(r);
-    // }).catch(next);
 
     Usuario.findByIdAndDelete(id)
     .then(r => res.send(r))

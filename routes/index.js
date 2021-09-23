@@ -5,7 +5,8 @@ router.get('/', (req, res) => {
 })
 
 router.use("/usuarios", require('./usuarios.js'));
-router.use("/ventas", require('./ventas.js'));
-router.use("/solicitudes", require('./solicitudes.js'));
+router.use("/productos", require('./productos.js'));
+// router.use("/ventas", require('./ventas.js'));
+// router.use("/solicitudes", require('./solicitudes.js'));
 
 module.exports = router;
