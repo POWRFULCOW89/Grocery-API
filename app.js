@@ -21,6 +21,6 @@ require("./config/passport.js");
 
 app.use('/v1', require('./routes/index.js')); // ruteo
 
-app.listen(3000, () => console.log('App listening on 3000'));
+app.listen(3000, () => console.log('App listening on 3000')); // habilitar para heroku
 
 module.exports = app;
