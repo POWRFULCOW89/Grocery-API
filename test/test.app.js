@@ -58,7 +58,7 @@ describe('Flujo de usuario', () => {
 
         chai.request(api)
             // .post('v1/usuarios')
-            .post('/v1/usuarios/entrar')
+            .post('/v1/usuarios/login')
             .set('content-type', 'application/json')
             // .set({ Authorization: `Bearer ${token}` })
             .send(JSON.stringify({
