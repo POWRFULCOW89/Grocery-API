@@ -93,6 +93,18 @@ describe('Flujo de usuario', () => {
             });
     });
 
+    it('should retrieve three users', async () => {
+        chai.request(api)
+            .get('/v1/usuarios?limit=3')
+            .auth(token, { type: 'bearer' })
+            .end((err, res) => {
+                expect(err).to.be.null;
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.an('array');
+                expect(res.body.length).to.equal(3);
+            });
+    });
+
     it('should retrieve specific users', async () => {
 
         const user = "614a93e8a2f74c4ad3c838fe";

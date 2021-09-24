@@ -58,6 +58,17 @@ describe('Flujo de ventas', () => {
             });
     });
 
+    it('should retrieve three sales', async () => {
+        chai.request(api)
+            .get('/v1/ventas?limit=3')
+            .end((err, res) => {
+                expect(err).to.be.null;
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.an('array');
+                expect(res.body.length).to.equal(3);
+            });
+    });
+
     it('should retrieve specific sales', async () => {
         chai.request(api)
             .get('/v1/ventas/' + id)
