@@ -23,7 +23,7 @@ describe('Flujo de ventas', () => {
     const n = Date.now(); // Generating a sample sale
     const nuevaVenta = {
         "vendedor": usuario,
-        "productos": [1,2],
+        "productos": ["CSOL001", "CSOL002"],
         "cantidad": Math.floor(Math.random() * 10),
         "subtotal": Math.floor(Math.random() * 100),
         "total": Math.floor(Math.random() * 100)
@@ -43,38 +43,38 @@ describe('Flujo de ventas', () => {
                 expect(res.body).to.have.property('createdAt');
                 expect(res.body).to.have.property('updatedAt');
 
-                // Venta.findById(res.body._id).then(venta => id = venta._id).catch(console.log);
+                Venta.findById(res.body._id).then(venta => id = venta._id).catch(console.log);
             });
     });
 
-    // it('should retrieve all products', async () => {
-    //     chai.request(api)
-    //         .get('/v1/productos')
-    //         .end((err, res) => {
-    //             expect(err).to.be.null;
-    //             expect(res).to.have.status(200);
-    //             expect(res.body).to.be.an('array');
-    //             expect(res.body.length).to.be.greaterThanOrEqual(1);
-    //         });
-    // });
+    it('should retrieve all sales', async () => {
+        chai.request(api)
+            .get('/v1/ventas')
+            .end((err, res) => {
+                expect(err).to.be.null;
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.an('array');
+                expect(res.body.length).to.be.greaterThanOrEqual(1);
+            });
+    });
 
-    // it('should retrieve specific products', async () => {
-    //     chai.request(api)
-    //         .get('/v1/productos/' + cod)
-    //         .set('content-type', 'application/json')
-    //         .end((err, res) => {
-    //             expect(err).to.be.null;
-    //             expect(res).to.have.status(200);
-    //             expect(res).to.be.json;
-    //             expect(res.body).to.have.property('_id');
-    //             expect(res.body).to.have.property('nombre');
-    //             expect(res.body).to.have.property('categoria');
-    //             expect(res.body).to.have.property('stock');
-    //             expect(res.body).to.have.property('precio');
-    //             expect(res.body).to.have.property('codigo');
-                
-    //         });
-    // });
+    it('should retrieve specific sales', async () => {
+        chai.request(api)
+            .get('/v1/ventas/' + id)
+            .set('content-type', 'application/json')
+            .end((err, res) => {
+                expect(err).to.be.null;
+                expect(res).to.have.status(200);
+                expect(res).to.be.json;
+                expect(res.body).to.have.property('_id');
+                expect(res.body).to.have.property('vendedor');
+                expect(res.body).to.have.property('productos');
+                expect(res.body.productos.length).to.be.greaterThanOrEqual(1);
+                expect(res.body.cantidad).to.be.a('number');
+                expect(res.body.subtotal).to.be.a('number');
+                expect(res.body.total).to.be.a('number');
+            });
+    });
 
     // it('should edit a specified product',  async () => {
     //     chai.request(api)
@@ -100,23 +100,24 @@ describe('Flujo de ventas', () => {
     //         });
     // });
 
-    // it('should delete a specific product',  async () => {
-    //     chai.request(api)
-    //         .delete('/v1/productos/' + nuevoProducto.codigo)
-    //         .set('content-type', 'application/json')
-    //         .auth(token, { type: 'bearer' })
-    //         .end((err, res) => {
-    //             expect(err).to.be.null;
-    //             expect(res).to.have.status(200);
-    //             expect(res).to.be.json;
-    //             expect(res.body).to.have.property('_id');
-    //             expect(res.body).to.have.property('nombre');
-    //             expect(res.body).to.have.property('categoria');
-    //             expect(res.body).to.have.property('stock');
-    //             expect(res.body).to.have.property('precio');
-    //             expect(res.body).to.have.property('codigo');
+    it('should delete a specific sale',  async () => {
+        chai.request(api)
+            .delete('/v1/ventas/' + id)
+            .set('content-type', 'application/json')
+            .auth(token, { type: 'bearer' })
+            .end((err, res) => {
+                expect(err).to.be.null;
+                expect(res).to.have.status(200);
+                expect(res).to.be.json;
+                expect(res.body).to.have.property('_id');
+                expect(res.body).to.have.property('vendedor');
+                expect(res.body).to.have.property('productos');
+                expect(res.body.productos.length).to.be.greaterThanOrEqual(1);
+                expect(res.body.cantidad).to.be.a('number');
+                expect(res.body.subtotal).to.be.a('number');
+                expect(res.body.total).to.be.a('number');
 
-    //             Producto.findById(id).then(r => expect(r).to.be.null).catch(console.log);
-    //         });
-    // });
+                Venta.findById(id).then(r => expect(r).to.be.null).catch(console.log);
+            });
+    });
 })
