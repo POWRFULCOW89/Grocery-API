@@ -10,6 +10,9 @@ const crearProducto = (req, res, next) => {
 }
 
 const obtenerProductos = (req, res, next) => {
+
+    let limit = isNaN(parseInt(req?.query?.limit)) ? null : parseInt(req.query.limit);
+
     if (req.params.codigo){ // Si se buscó por id, devolver el registro
         Producto.findOne({codigo: req.params.codigo})
         .then(prod => {
@@ -18,7 +21,20 @@ const obtenerProductos = (req, res, next) => {
         })
         .catch(next);
     } else { // Si no se especificó un id, devolver todos los registros
-        Producto.find()
+
+        if (limit) { 
+            Producto.aggregate([
+                {
+                  '$sample': {
+                    'size': limit
+                  }
+                }
+            ]).then(prods => {
+                if (!prods) return res.sendStatus(404);
+                else res.send(prods);
+            }).catch(next);
+        }
+        else Producto.find()
         .then(prods => {
             if (!prods) return res.sendStatus(404);
             else res.send(prods);

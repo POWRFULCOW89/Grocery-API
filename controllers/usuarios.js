@@ -18,6 +18,9 @@ const crearUsuario = (req, res, next) => {
 }
 
 const obtenerUsuarios = (req, res, next) => {
+
+    let limit = isNaN(parseInt(req?.query?.limit)) ? null : parseInt(req.query.limit);
+
     if (req?.params?.id){
         Usuario.findById(req?.params?.id)
             .then( user => {
@@ -28,9 +31,27 @@ const obtenerUsuarios = (req, res, next) => {
     }
     
     else {
-        Usuario.find()
-            .then(docs => res.send(docs))
+
+        if (limit){
+            Usuario.aggregate([
+                {
+                  '$sample': {
+                    'size': limit
+                  }
+                }
+            ]).then(users => {
+                if (!users) return res.sendStatus(404);
+                else res.send(users);
+            }).catch(next);
+        
+        } else{
+            Usuario.find()
+            .then(users => {
+                if (!users) return res.sendStatus(404);
+                else res.json(users);
+            })
             .catch(next);
+        }
     } 
 }
   

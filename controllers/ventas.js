@@ -9,6 +9,9 @@ const crearVenta = (req, res, next) => {
 };
 
 const obtenerVentas = (req, res, next) => {
+
+	let limit = isNaN(parseInt(req?.query?.limit)) ? null : parseInt(req.query.limit);
+
 	if (req.params.idVenta)
 		Venta.findById(req.params.idVenta)
 			.then(venta => {
@@ -16,10 +19,26 @@ const obtenerVentas = (req, res, next) => {
 				else res.json(venta);
 			})
 			.catch(next);
-	else
-		Venta.find()
-			.then(ventas => res.send(ventas))
+	else {
+		if (limit) { 
+            Venta.aggregate([
+                {
+                  '$sample': {
+                    'size': limit
+                  }
+                }
+              ]).then(ventas => {
+                if (!ventas) return res.sendStatus(404);
+                else res.send(ventas);
+              }).catch(next);
+        }
+		else Venta.find()
+			.then(ventas => {
+				if (!ventas) return res.sendStatus(404);
+				else res.send(ventas);
+			}) 
 			.catch(next);
+	}
 };
 
 const eliminarVenta = (req, res, next) => {
