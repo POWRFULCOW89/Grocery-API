@@ -77,21 +77,20 @@ API para un punto de venta de una tienda miscelánea
   - Admin, gerente, cajero, venta, producto
 
 - ¿Qué características tiene cada entidad?
-  - Inventario
-    - Producto: Nombre de producto, categoría, stock, precio, código.
+  - Producto: Nombre de producto, categoría, stock, precio, código.
   - Usuario: Nombre de usuario, Nombre, contraseña, Rol
   - Venta: Productos, cantidad, subtotal, total
 - ¿Qué funcionalidades tiene cada entidad?
-  - Inventario: CRUD, reportes
+  - Producto: CRUD
   - Usuario: CRUD, iniciar sesión
   - Venta: CRUD
 - Utilicen historias de usuario para ayudarte a responder las preguntas del inciso anterior.
   - Administrador:
     - Yo administrador, me gustaria poder generar reportes por periodos
-    - Yo administrador quiero tener control sobre mi inventario
+    - Yo administrador quiero tener control sobre los productos
     - Yo administrador quiero administrar mis usuarios
   - Gerente:
-    - Yo gerente quiero poder añadir, eliminar, actualizar el inventario.
+    - Yo gerente quiero poder añadir, eliminar, actualizar los productos.
   - Cajero:
     - Quiero poder generar una venta
     - Quiero poder eliminar ventas
