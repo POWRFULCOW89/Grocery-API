@@ -8,12 +8,14 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // const uri = require('./config').secret;
-mongoose.connect(process.env.SECRET);
+mongoose.connect(process.env.MONGO_URI,
+    {useUnifiedTopology: true, useNewUrlParser: true});
 
 mongoose.set("debug", true);
 
 require("./models/Usuario");
-require("./models/Producto")
+require("./models/Producto");
+require("./models/Venta");
 // require("./models/Solicitud");
 
 app.use(bodyParser.json());

@@ -1,32 +1,43 @@
-const Venta = require('../models/Venta');
+const mongoose = require('mongoose');
+const Venta = mongoose.model('Venta');
+const Usuario = mongoose.model('Usuario');
 
-const crearVenta = (req, res) => {
-    const venta = new Venta(...req.body);
-    res.status(200).send(venta);
-}
+const crearVenta = (req, res, next) => {
+	const venta = new Venta(req.body);
+	Usuario.findById(venta.vendedor)
+		.then(user => {
+			if (user.rol === 'cajero') {
+				venta
+					.save()
+					.then(venta => res.status(200).json(venta))
+					.catch(next);
+			} else  res.status(401).json();
+		})
+		.catch(next);
+};
 
-const obtenerVentas = (req, res) => {
-    const venta1 = new Venta(["Bud Light", "Sol"], 2, 50, 55);
-    const venta2 = new Venta(["Heineken", "Sol"], 4, 100, 110);
-    const dummyVentas = [venta1, venta2];
+const obtenerVentas = (req, res, next) => {
+	if (req.params.idVenta)
+		Venta.findById(req.params.id)
+			.then(venta => {
+				if (!venta) return res.sendStatus(404);
+				else res.json(venta);
+			})
+			.catch(next);
+	else
+		Venta.find()
+			.then(ventas => res.send(ventas))
+			.catch(next);
+};
 
-    res.send(dummyVentas);
-}
-
-const modificarVenta = (req, res) => {
-    let venta = new Venta(req.params.id, ["Sol"], 1, 20, 30);
-    const modificaciones = req.body;
-    venta = {...venta, ...modificaciones};
-    res.status(200).send(venta);
-}
-
-const eliminarVenta = (req, res) => {
-    res.status(200).send(`Venta ${req.params.id} eliminada`); // Eliminación simulada
-}
+const eliminarVenta = (req, res, next) => {
+	Venta.findByIdAndDelete(req.params.idVenta)
+		.then(res.sendStatus(200))
+		.catch(next);
+};
 
 module.exports = {
-    crearVenta,
-    obtenerVentas,
-    modificarVenta,
-    eliminarVenta
-}
+	crearVenta,
+	obtenerVentas,
+	eliminarVenta,
+};
