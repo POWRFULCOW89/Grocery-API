@@ -10,7 +10,7 @@ const api = app // local testing
 const Venta = mongoose.model("Venta"); 
 
 const token = process.env.SAMPLE_TOKEN; // A previosly generated token to simplify testing
-const cod = "CSOL001"; // A sample product code
+const cod = "LLAL001"; // A sample product code
 const usuario = '614b99ba6db755b3e572456e';
 
 chai.use(chaiHttp); // para realizar peticiones a nuestra API

@@ -15,7 +15,7 @@ const Usuario = mongoose.model("Usuario");
 
 chai.use(chaiHttp); // para realizar peticiones a nuestra API
 
-describe.skip('Flujo de usuario', () => {
+describe('Flujo de usuario', () => {
     beforeEach( async () => {
         await new Promise(resolve => setTimeout(resolve, 1000));
         console.log("----------------------");

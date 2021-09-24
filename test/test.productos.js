@@ -10,11 +10,11 @@ const api = app // local testing
 const Producto = mongoose.model("Producto"); 
 
 const token = process.env.SAMPLE_TOKEN; // A previosly generated token to simplify testing
-const cod = "CSOL001"; // A sample product code
+const cod = "LLAL001"; // A sample product code
 
 chai.use(chaiHttp); // para realizar peticiones a nuestra API
 
-describe.skip('Flujo de producto', () => {
+describe('Flujo de producto', () => {
     beforeEach( async () => {
         await new Promise(resolve => setTimeout(resolve, 1000));
     });
