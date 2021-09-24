@@ -14,7 +14,6 @@ const api = app
 const Producto = mongoose.model("Producto");
 
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNGE5NjhmZGViZjIzMjVhNDU2ZDQ3YiIsInVzZXJuYW1lIjoiZGllZ3VpdG8zIiwiZXhwIjoxNjM3NDY4MTE4LCJpYXQiOjE2MzIyODA1MTh9.Q4-tRMtlLOoVf8oUlYaVxxNQ2hE1gL5ptYAt0xVn_Z8";
-let id = undefined;
 const cod = "CSOL001";
 
 chai.use(chaiHttp); // para realizar peticiones a nuestra API
@@ -36,11 +35,11 @@ describe('Flujo de producto', () => {
 
 
     it('should create a new product', async () => {
-
         chai.request(api)
             // .post('v1/usuarios')
             .post('/v1/productos')
             .set('content-type', 'application/json')
+            .auth(token, { type: 'bearer' })
             .send(JSON.stringify(nuevoProducto))
             .end((err, res) => {
                 expect(err).to.be.null;
@@ -56,7 +55,6 @@ describe('Flujo de producto', () => {
     });
 
     it('should retrieve all products', async () => {
-
         chai.request(api)
             .get('/v1/productos')
             // .set('content-type', 'application/json')
@@ -70,13 +68,10 @@ describe('Flujo de producto', () => {
     });
 
     it('should retrieve specific products', async () => {
-
-        
-        
         chai.request(api)
             .get('/v1/productos/' + cod)
             .set('content-type', 'application/json')
-            .auth(token, { type: 'bearer' })
+            // .auth(token, { type: 'bearer' })
             .end((err, res) => {
                 expect(err).to.be.null;
                 expect(res).to.have.status(200);
