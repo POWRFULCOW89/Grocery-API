@@ -1,31 +1,25 @@
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-
 const expect = chai.expect;
 const mongoose = require("mongoose");
-
 const app = require('../app.js');
 
-const api = app
-// const api = 'https://proyectofinalback19.herokuapp.com';
+const api = app // local testing
+// const api = 'https://proyectofinalback19.herokuapp.com'; // server testing
 
-// const Usuario = require("../models/Usuario");
-const Producto = mongoose.model("Producto");
+const Producto = mongoose.model("Producto"); 
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNGE5NjhmZGViZjIzMjVhNDU2ZDQ3YiIsInVzZXJuYW1lIjoiZGllZ3VpdG8zIiwiZXhwIjoxNjM3NDY4MTE4LCJpYXQiOjE2MzIyODA1MTh9.Q4-tRMtlLOoVf8oUlYaVxxNQ2hE1gL5ptYAt0xVn_Z8";
-let id = undefined;
-const cod = "CSOL001";
+const token = process.env.SAMPLE_TOKEN; // A previosly generated token to simplify testing
+const cod = "CSOL001"; // A sample product code
 
 chai.use(chaiHttp); // para realizar peticiones a nuestra API
 
 describe('Flujo de producto', () => {
     beforeEach( async () => {
         await new Promise(resolve => setTimeout(resolve, 1000));
-        // console.log("----------------------");
     });
 
-    const n = Date.now();
+    const n = Date.now(); // Generating a sample product
     const nuevoProducto = {
         "nombre": `productname-${n}`,
         "categoria": `category-${n}`,
@@ -34,13 +28,11 @@ describe('Flujo de producto', () => {
         "codigo": `COD${n}`
     }
 
-
     it('should create a new product', async () => {
-
         chai.request(api)
-            // .post('v1/usuarios')
             .post('/v1/productos')
             .set('content-type', 'application/json')
+            .auth(token, { type: 'bearer' })
             .send(JSON.stringify(nuevoProducto))
             .end((err, res) => {
                 expect(err).to.be.null;
@@ -52,15 +44,11 @@ describe('Flujo de producto', () => {
 
                 Producto.findOne({codigo: nuevoProducto.codigo}).then(prod => id = prod._id).catch(console.log);
             });
-        
     });
 
     it('should retrieve all products', async () => {
-
         chai.request(api)
             .get('/v1/productos')
-            // .set('content-type', 'application/json')
-            // .auth(token, { type: 'bearer' })
             .end((err, res) => {
                 expect(err).to.be.null;
                 expect(res).to.have.status(200);
@@ -70,13 +58,9 @@ describe('Flujo de producto', () => {
     });
 
     it('should retrieve specific products', async () => {
-
-        
-        
         chai.request(api)
             .get('/v1/productos/' + cod)
             .set('content-type', 'application/json')
-            .auth(token, { type: 'bearer' })
             .end((err, res) => {
                 expect(err).to.be.null;
                 expect(res).to.have.status(200);
@@ -92,14 +76,13 @@ describe('Flujo de producto', () => {
     });
 
     it('should edit a specified product',  async () => {
-
         chai.request(api)
             .put('/v1/productos/' + cod)
             .set('content-type', 'application/json')
             .auth(token, { type: 'bearer' })
             .send(JSON.stringify({
                 nombre: nuevoProducto.nombre + " edited",
-                cateogoria: nuevoProducto.categoria + " edited",
+                categoria: nuevoProducto.categoria + " edited",
             }))
             .end((err, res) => {
                 expect(err).to.be.null;
@@ -111,12 +94,12 @@ describe('Flujo de producto', () => {
                 expect(res.body).to.have.property('stock');
                 expect(res.body).to.have.property('precio');
                 expect(res.body).to.have.property('codigo');
+                expect(res.body.nombre).to.equal(nuevoProducto.nombre + " edited");
+                expect(res.body.categoria).to.equal(nuevoProducto.categoria + " edited");
             });
     });
 
-    
     it('should delete a specific product',  async () => {
-
         chai.request(api)
             .delete('/v1/productos/' + nuevoProducto.codigo)
             .set('content-type', 'application/json')
@@ -131,9 +114,8 @@ describe('Flujo de producto', () => {
                 expect(res.body).to.have.property('stock');
                 expect(res.body).to.have.property('precio');
                 expect(res.body).to.have.property('codigo');
+
+                Producto.findById(id).then(r => expect(r).to.be.null).catch(console.log);
             });
     });
-
-    
-    
 })
