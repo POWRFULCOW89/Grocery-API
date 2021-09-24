@@ -100,3 +100,9 @@ API para un punto de venta de una tienda miscelánea
 [Modelos](./models)
 
 ### 5. Crear un repositorio en Git de su proyecto, en donde se debe de subir todo el código
+
+## Sobre el proyecto
+
+[Documentación Swagger](https://app.swaggerhub.com/apis-docs/Bedu-Back-19/ProyectoFinalBack/1.0.1)
+[API pública](https://proyectofinalback19.herokuapp.com/v1)
+Vídeo
