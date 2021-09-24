@@ -10,14 +10,16 @@ describe('Sanitización de JSON', () => {
             age: "",
             occupation: null,
             house: undefined,
-            school: "BEDU"
+            school: "BEDU",
+            hobbies: []
         }
 
         const obj2 = {
             usuario: "Diego", 
             email: "d@d.d",
             password: 'd',
-            rol: false
+            rol: false,
+            details: {}
         }
 
         expect(sanitizeJSON(obj)).to.deep.equal({ name: "Diego", school: "BEDU" });

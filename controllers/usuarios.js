@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const Usuario = mongoose.model('Usuario');
 const passport = require('passport');
+const { sanitizeJSON } = require('../util');
 
 const crearUsuario = (req, res, next) => {
     
@@ -38,12 +39,12 @@ function modificarUsuario(req, res, next) {
         Usuario.findById(req.params.id)
             .then(user => {
                 if (!user) return res.sendStatus(404); 
-                let nuevaInfo = req.body;
+                // let nuevaInfo = req.body;
     
-                if (typeof nuevaInfo.usuario !== 'undefined') user.usuario = nuevaInfo.usuario;
-                if (typeof nuevaInfo.nombre !== 'undefined') user.nombre = nuevaInfo.nombre;
-                if (typeof nuevaInfo.email !== 'undefined') user.email = nuevaInfo.email;
-                if (typeof nuevaInfo.rol !== 'undefined') user.rol = nuevaInfo.rol;
+                let nuevaInfo = sanitizeJSON(req.body);
+            
+                Object.assign(user, nuevaInfo);
+
                 if (typeof nuevaInfo.password !== 'undefined') {
                     user.createPassword(nuevaInfo.password);
                     user.save()
@@ -86,7 +87,26 @@ function iniciarSesion(req, res, next) {
     })(req, res, next);
   }
 
-// const iniciarSesion
+// Agregaciones
+
+//   const obtenerConteo = (req, res, next) => {
+//     Solicitud.aggregate([
+//         {
+//           '$match': {
+//             '_id': req.params.id,
+//           }
+//         }, {
+//           '$count': 'count'
+//         }, {
+//           '$group': {
+//             '_id': null, 
+//             'count': {
+//               '$sum': '$count'
+//             }
+//           }
+//         }
+//       ]).then(doc => res.send(doc)).catch(next);
+// }
 
 module.exports = {
     crearUsuario,
