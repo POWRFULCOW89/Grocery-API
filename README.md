@@ -36,6 +36,8 @@
     npm run dev
     ```
 
+Se requiere de un archivo `.env` en la raíz del proyecto con las entradas `MONGO_URI` para el funcionamiento de la API y `SAMPLE_TOKEN` para la ejecución de las pruebas; en caso de que `NODE_ENV` sea distinto a `production`.
+
 ## Pila técnica
 
 Se trata de una API construida con [Express](https://expressjs.com/es/), un framework backend para el entorno de ejecución Node.js. [Mongoose](https://mongoosejs.com) se utiliza como Object Document Mapper en conjunción con MongoDB. Las pruebas unitarias son modeladas con [Chai](https://www.chaijs.com) y ejecutadas en [Mocha](https://mochajs.org). Como sistema de autenticación, se cuenta con [Passport](http://www.passportjs.org).
@@ -102,6 +104,8 @@ API para un punto de venta de una tienda miscelánea
 ### 5. Crear un repositorio en Git de su proyecto, en donde se debe de subir todo el código
 
 ## Sobre el proyecto
+
+Dado que la aplicación se encuentra hospedada en un tier básico de Heroku, entrará en modo de inactividad tras cierto tiempo sin conexiones. Para su uso, basta con realizar cualquier petición para que la aplicación reciba un ping y reanude su ejecución, tras un corto tiempo.
 
 [Documentación Swagger](https://app.swaggerhub.com/apis-docs/Bedu-Back-19/ProyectoFinalBack/1.0.1)
 [API pública](https://proyectofinalback19.herokuapp.com/v1)
