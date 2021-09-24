@@ -1,18 +1,8 @@
-// class Usuario {
-//     constructor(id, usuario, nombre, contraseña, rol){
-//         this.id = id;
-//         this.usuario = usuario;
-//         this.nombre = nombre;
-//         this.contraseña = contraseña;
-//         this.rol = rol;
-//     }
-// }
-
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const crypto = require('crypto');
 const jwt = require("jsonwebtoken");
-const secret = process.env.SECRET;
+const secret = process.env.MONGO_URI;
 
 const SchemaUsuario = new mongoose.Schema({
     usuario: {type: String, required: [true, "El nombre de usuario debe ser único"], unique: true},

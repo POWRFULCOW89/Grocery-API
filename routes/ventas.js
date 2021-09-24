@@ -6,11 +6,11 @@ const {
 	eliminarVenta,
 } = require('../controllers/ventas');
 
-router.get('/', obtenerVentas);
+const auth = require('./auth');
+
 router.get('/:idVenta', obtenerVentas);
-
-router.post('/', crearVenta);
-
-router.delete('/:idVenta', eliminarVenta);
+router.get('/', obtenerVentas);
+router.post('/', auth.requerido, crearVenta);
+router.delete('/:idVenta', auth.requerido, eliminarVenta);
 
 module.exports = router;

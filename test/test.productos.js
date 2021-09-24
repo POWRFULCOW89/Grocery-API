@@ -14,7 +14,7 @@ const cod = "CSOL001"; // A sample product code
 
 chai.use(chaiHttp); // para realizar peticiones a nuestra API
 
-describe('Flujo de producto', () => {
+describe.skip('Flujo de producto', () => {
     beforeEach( async () => {
         await new Promise(resolve => setTimeout(resolve, 1000));
     });

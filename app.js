@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
+    require('dotenv').config(); // Habilitando el testeo local
 }
 
 const express = require('express');
@@ -7,16 +7,13 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-// const uri = require('./config').secret;
-mongoose.connect(process.env.MONGO_URI,
-    {useUnifiedTopology: true, useNewUrlParser: true});
+mongoose.connect(process.env.MONGO_URI, {useUnifiedTopology: true, useNewUrlParser: true});
 
-mongoose.set("debug", true);
+mongoose.set("debug", true); // Habilitando logs en cada operación de Mongo
 
 require("./models/Usuario");
 require("./models/Producto");
 require("./models/Venta");
-// require("./models/Solicitud");
 
 app.use(bodyParser.json());
 

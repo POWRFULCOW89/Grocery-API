@@ -1,6 +1,6 @@
 const jwt = require("express-jwt");
 // const secret = require("../config").secret;
-const secret = process.env.SECRET;
+const secret = process.env.MONGO_URI;
 
 const getTokenFromHeader = req => {
     const authorization = req.headers.authorization;
