@@ -107,6 +107,6 @@ API para un punto de venta de una tienda miscelánea
 
 Dado que la aplicación se encuentra hospedada en un tier básico de Heroku, entrará en modo de inactividad tras cierto tiempo sin conexiones. Para su uso, basta con realizar cualquier petición para que la aplicación reciba un ping y reanude su ejecución, tras un corto tiempo.
 
-[Documentación Swagger](https://app.swaggerhub.com/apis-docs/Bedu-Back-19/ProyectoFinalBack/1.0.1)
+[Documentación Swagger](https://app.swaggerhub.com/apis-docs/Bedu-Back-19/ProyectoFinalBack/1.0.2)
 [API pública](https://proyectofinalback19.herokuapp.com/v1)
 Vídeo
