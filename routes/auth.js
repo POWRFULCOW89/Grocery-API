@@ -1,7 +1,7 @@
 const jwt = require("express-jwt");
-// const secret = require("../config").secret;
 const secret = process.env.MONGO_URI;
 
+// Obtener el token de la cabecera de autorización
 const getTokenFromHeader = req => {
     const authorization = req.headers.authorization;
     if (authorization && 
@@ -11,6 +11,7 @@ const getTokenFromHeader = req => {
     }
 }
 
+// Definiendo distintos niveles de autorización
 const auth = {
     requerido: jwt({
         secret: secret,

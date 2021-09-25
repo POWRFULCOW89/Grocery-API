@@ -1,7 +1,6 @@
 /* 
-    Removing all properties with falsy values to ease
-    modification of records instead of manually checking each one,
-    including empty objects and arrays.
+    Eliminando todas las propiedades con valores de tipo 'falsy',
+    para facilitar la modificación de registros. También se eliminan objetos vacíos
 */
 const sanitizeJSON = obj => {
     for (const key in obj) {

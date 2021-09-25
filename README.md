@@ -2,10 +2,7 @@
 
 ## Integrantes del equipo
 
-- [Valeria Jimeno Villegas](https://github.com/valjime95)
 - [Rogelio Magaña Tapia](https://github.com/MaganaRogelio)
-- [Obed Noe Martínez González](https://github.com/SupaStar)
-- [Sergio Gael Martínez Sarmiento](https://github.com/Searge1357)
 - [Diego Domínguez Melo](https://github.com/POWRFULCOW89)
 
 ## Instalación
@@ -16,7 +13,7 @@
     gh repo clone SupaStar/ProyectoFinalBackBedu
     ```
 
-    o [descargar](https://github.com/SupaStar/ProyectoFinalBackBedu/archive/refs/heads/main.zip) el repositorio como ZIP.
+    o [descargar](https://github.com/SupaStar/ProyectoFinalBackBedu/archive/refs/heads/main.zip) el repositorio como ZIP. 
 
 2. Instalar las dependencias:
 
@@ -40,7 +37,7 @@ Se requiere de un archivo `.env` en la raíz del proyecto con las entradas `MONG
 
 ## Pila técnica
 
-Se trata de una API construida con [Express](https://expressjs.com/es/), un framework backend para el entorno de ejecución Node.js. [Mongoose](https://mongoosejs.com) se utiliza como Object Document Mapper en conjunción con MongoDB. Las pruebas unitarias son modeladas con [Chai](https://www.chaijs.com) y ejecutadas en [Mocha](https://mochajs.org). Como sistema de autenticación, se cuenta con [Passport](http://www.passportjs.org).
+Se trata de una API construida con [Express](https://expressjs.com/es/), un framework backend para el entorno de ejecución Node.js. [Mongoose](https://mongoosejs.com) se utiliza como Object Document Mapper en conjunción con la base de datos no relacional [MongoDB](https://www.mongodb.com/es). Las pruebas unitarias son modeladas con [Chai](https://www.chaijs.com) y ejecutadas en [Mocha](https://mochajs.org). Como sistema de autenticación, se cuenta con [Passport](http://www.passportjs.org).
 
 ## Especificación del proyecto
 
@@ -52,6 +49,7 @@ API para un punto de venta de una tienda miscelánea
 
 - ¿Qué espero que haga el proyecto?
   - Se espera que la API pueda proporcionar endpoints para el registro, ventas y administración del inventario.
+
 - ¿Qué tipos de usuario tendrá nuestro sistema?
   - Administrador: Dueño del local
     - Generar reportes
@@ -62,6 +60,7 @@ API para un punto de venta de una tienda miscelánea
     - Administración de inventario
   - Cajero:
     - Encargado de ventas
+
 - ¿Qué acciones puede realizar cada usuario?
   - Administrador:
     - Generar reportes por periodos de ventas
@@ -72,6 +71,7 @@ API para un punto de venta de una tienda miscelánea
   - Cajero:
     - Realizar  y eliminar ventas
     - Aperturar y cerrar cajas
+
 - ¿Qué información se necesita?
   - Cantidad de productos dentro del inventario, cantidad de productos vendidos y el costo total de estos.
 
@@ -80,12 +80,14 @@ API para un punto de venta de una tienda miscelánea
 
 - ¿Qué características tiene cada entidad?
   - Producto: Nombre de producto, categoría, stock, precio, código.
-  - Usuario: Nombre de usuario, Nombre, contraseña, Rol
-  - Venta: Productos, cantidad, subtotal, total
+  - Usuario: Nombre de usuario, nombre, email, contraseña, rol.
+  - Venta: Productos, cantidad, subtotal, total.
+
 - ¿Qué funcionalidades tiene cada entidad?
   - Producto: CRUD
   - Usuario: CRUD, iniciar sesión
   - Venta: CRUD
+
 - Utilicen historias de usuario para ayudarte a responder las preguntas del inciso anterior.
   - Administrador:
     - Yo administrador, me gustaria poder generar reportes por periodos
@@ -101,11 +103,11 @@ API para un punto de venta de una tienda miscelánea
 
 [Modelos](./models)
 
-### 5. Crear un repositorio en Git de su proyecto, en donde se debe de subir todo el código
-
 ## Sobre el proyecto
 
 Dado que la aplicación se encuentra hospedada en un tier básico de Heroku, entrará en modo de inactividad tras cierto tiempo sin conexiones. Para su uso, basta con realizar cualquier petición para que la aplicación reciba un ping y reanude su ejecución, tras un corto tiempo.
+
+### Enlaces relevantes
 
 [Documentación Swagger](https://app.swaggerhub.com/apis-docs/Bedu-Back-19/ProyectoFinalBack/1.0.2)
 [API pública](https://proyectofinalback19.herokuapp.com/v1)
