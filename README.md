@@ -109,6 +109,6 @@ Dado que la aplicación se encuentra hospedada en un tier básico de Heroku, ent
 
 ### Enlaces relevantes
 
-[Documentación Swagger](https://app.swaggerhub.com/apis-docs/Bedu-Back-19/ProyectoFinalBack/1.0.2)
-[API pública](https://proyectofinalback19.herokuapp.com/v1)
-Vídeo
+#### [Documentación Swagger](https://app.swaggerhub.com/apis-docs/Bedu-Back-19/ProyectoFinalBack/1.0.2)
+#### [API pública](https://proyectofinalback19.herokuapp.com/v1)
+#### Vídeo
