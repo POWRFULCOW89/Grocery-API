@@ -37,7 +37,7 @@ Se requiere de un archivo `.env` en la raíz del proyecto con las entradas `MONG
 
 ## Pila técnica
 
-Se trata de una API construida con [Express](https://expressjs.com/es/), un framework backend para el entorno de ejecución Node.js. [Mongoose](https://mongoosejs.com) se utiliza como Object Document Mapper en conjunción con la base de datos no relacional [MongoDB](https://www.mongodb.com/es). Las pruebas unitarias son modeladas con [Chai](https://www.chaijs.com) y ejecutadas en [Mocha](https://mochajs.org). Como sistema de autenticación, se cuenta con [Passport](http://www.passportjs.org).
+Se trata de una API construida con [Express](https://expressjs.com/es/), un framework backend para el entorno de ejecución Node.js. [Mongoose](https://mongoosejs.com) se utiliza como Object Document Mapper en conjunción con la base de datos no relacional [MongoDB](https://www.mongodb.com/es). Las pruebas unitarias son modeladas con [Chai](https://www.chaijs.com) y ejecutadas en [Mocha](https://mochajs.org). Como sistema de autenticación, se cuenta con [Passport](http://www.passportjs.org). Finalmente, el proyecto se encuentra desplegado en [Heroku](https://www.heroku.com).
 
 ## Especificación del proyecto
 
@@ -69,7 +69,7 @@ API para un punto de venta de una tienda miscelánea
   - Gerente:
     - CRUD inventario
   - Cajero:
-    - Realizar  y eliminar ventas
+    - Realizar y eliminar ventas
     - Aperturar y cerrar cajas
 
 - ¿Qué información se necesita?

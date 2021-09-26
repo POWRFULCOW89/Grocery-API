@@ -8,13 +8,15 @@ const crearUsuario = (req, res, next) => {
     
     const body = req.body, password = body.password;
 
-    delete body.password;
-
-    const user = new Usuario(body);
-    user.createPassword(password);
-    user.save()
-        .then( user => res.status(200).json(user.toAuthJSON()))
-        .catch(next);
+    if (typeof password === 'string'){
+        delete body.password;
+    
+        const user = new Usuario(body);
+        user.createPassword(password);
+        user.save()
+            .then( user => res.status(200).json(user.toAuthJSON()))
+            .catch(next);
+    } else res.status(400).send("Invalid password");
 }
 
 const obtenerUsuarios = (req, res, next) => {
