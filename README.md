@@ -1,114 +1,62 @@
 # Grocery API
+An API for inventory management, scoped to a small grocery store.
 
-## Integrantes del equipo
+## Install
 
-- [Rogelio Magaña Tapia](https://github.com/MaganaRogelio)
-- [Diego Domínguez Melo](https://github.com/POWRFULCOW89)
-
-## Instalación
-
-1. Clonar:
+1. Clone the repo:
 
     ```sh
-    gh repo clone SupaStar/ProyectoFinalBackBedu
+    gh repo clone POWRFULCOW89/Grocery-API
     ```
 
-    o [descargar](https://github.com/SupaStar/ProyectoFinalBackBedu/archive/refs/heads/main.zip) el repositorio como ZIP. 
+    or [download](https://github.com/POWRFULCOW89/Grocery-API/archive/refs/heads/main.zip) as ZIP. 
 
-2. Instalar las dependencias:
+2. Install the dependencies:
 
     ```sh
     npm i 
     ```
 
-3. Ejecutar las pruebas:
+3. Run the tests:
 
     ```sh
     npm test
     ```
 
-4. Ejecutar la aplicación:
+4. Run the app:
 
     ```sh
     npm run dev
     ```
 
-Se requiere de un archivo `.env` en la raíz del proyecto con las entradas `MONGO_URI` para el funcionamiento de la API y `SAMPLE_TOKEN` para la ejecución de las pruebas; en caso de que `NODE_ENV` sea distinto a `production`.
+An environment file is required in the project root, containg the `MONGO_URI` and `SAMPLE_TOKEN` variables for MongoDB and testing, respectively.
 
-## Pila técnica
+## Project
+The current project is built with [Express](https://expressjs.com/es/), a Node.js framework for backend code. [Mongoose](https://mongoosejs.com) is used as Object Document Mapper along with the NoSQL database [MongoDB](https://www.mongodb.com/es). Unit tests are modeled with [Chai](https://www.chaijs.com) and run with [Mocha](https://mochajs.org). As authentication mechanism, a local strategy is implemented with [Passport](http://www.passportjs.org). Finally, the API is deployed to [Heroku](https://www.heroku.com).
 
-Se trata de una API construida con [Express](https://expressjs.com/es/), un framework backend para el entorno de ejecución Node.js. [Mongoose](https://mongoosejs.com) se utiliza como Object Document Mapper en conjunción con la base de datos no relacional [MongoDB](https://www.mongodb.com/es). Las pruebas unitarias son modeladas con [Chai](https://www.chaijs.com) y ejecutadas en [Mocha](https://mochajs.org). Como sistema de autenticación, se cuenta con [Passport](http://www.passportjs.org). Finalmente, el proyecto se encuentra desplegado en [Heroku](https://www.heroku.com).
+### Project requirements
 
-## Especificación del proyecto
+#### Users
 
-### 1. Definan en equipo cuál será la temática de su proyecto
+- **Admin**: Super user that can generate reports, manage inventory and users.
+- **Manager**: Logged in user that can manage the inventory and cashier users.
+- **Cashier**: User that can make, edit and close sales.
 
-API para un punto de venta de una tienda miscelánea
+#### Models
 
-### 2. Definan los requerimientos del proyecto, así como su estructura, es decir, respondan las preguntas
+- **Product**:
+    - Name, category, stock, price, code.
+- **User**:
+    - Username, name, email, password, role.
+- **Sale**:
+    - Products, quantity, subtotal, total.
 
-- ¿Qué espero que haga el proyecto?
-  - Se espera que la API pueda proporcionar endpoints para el registro, ventas y administración del inventario.
+### API Documentation
 
-- ¿Qué tipos de usuario tendrá nuestro sistema?
-  - Administrador: Dueño del local
-    - Generar reportes
-    - Administración de inventario
-    - Contaduría
-    - Administracion de usuarios
-  - Gerente:
-    - Administración de inventario
-  - Cajero:
-    - Encargado de ventas
+The Grocery API documentation can be consulted in [Swagger Hub](https://app.swaggerhub.com/apis-docs/Bedu-Back-19/ProyectoFinalBack/1.0.2).
 
-- ¿Qué acciones puede realizar cada usuario?
-  - Administrador:
-    - Generar reportes por periodos de ventas
-    - CRUD inventario
-    - CRUD usuarios
-  - Gerente:
-    - CRUD inventario
-  - Cajero:
-    - Realizar y eliminar ventas
-    - Aperturar y cerrar cajas
+### Team
 
-- ¿Qué información se necesita?
-  - Cantidad de productos dentro del inventario, cantidad de productos vendidos y el costo total de estos.
+- [Rogelio Magaña Tapia](https://github.com/MaganaRogelio)
+- [Diego Domínguez Melo](https://github.com/POWRFULCOW89)
 
-- ¿Cuáles son las principales entidades?
-  - Admin, gerente, cajero, venta, producto
-
-- ¿Qué características tiene cada entidad?
-  - Producto: Nombre de producto, categoría, stock, precio, código.
-  - Usuario: Nombre de usuario, nombre, email, contraseña, rol.
-  - Venta: Productos, cantidad, subtotal, total.
-
-- ¿Qué funcionalidades tiene cada entidad?
-  - Producto: CRUD
-  - Usuario: CRUD, iniciar sesión
-  - Venta: CRUD
-
-- Utilicen historias de usuario para ayudarte a responder las preguntas del inciso anterior.
-  - Administrador:
-    - Yo administrador, me gustaria poder generar reportes por periodos
-    - Yo administrador quiero tener control sobre los productos
-    - Yo administrador quiero administrar mis usuarios
-  - Gerente:
-    - Yo gerente quiero poder añadir, eliminar, actualizar los productos.
-  - Cajero:
-    - Quiero poder generar una venta
-    - Quiero poder eliminar ventas
-
-### 4. Definan en JavaScript las clases que representen cada entidad de su proyecto
-
-[Modelos](./models)
-
-## Sobre el proyecto
-
-Dado que la aplicación se encuentra hospedada en un tier básico de Heroku, entrará en modo de inactividad tras cierto tiempo sin conexiones. Para su uso, basta con realizar cualquier petición para que la aplicación reciba un ping y reanude su ejecución, tras un corto tiempo.
-
-### Enlaces relevantes
-
-#### [Documentación Swagger](https://app.swaggerhub.com/apis-docs/Bedu-Back-19/ProyectoFinalBack/1.0.2)
-#### [API pública](https://proyectofinalback19.herokuapp.com/v1)
-#### [Vídeo](https://we.tl/t-b23N6bM61g) (expira el 3 de octubre )
